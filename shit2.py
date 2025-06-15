@@ -15,9 +15,6 @@ from datasets import Dataset
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 
-# ============================================
-# 🧩 四元组解析与评估函数
-# ============================================
 def parse_quadruples(text):
     """
     将形如 "(A1, B1, C1, D1); (A2, B2, C2, D2)" 的文本
@@ -53,10 +50,6 @@ def compute_quad_f1(preds, labels):
     f1 = 2 * precision * recall / (precision + recall) if precision + recall > 0 else 0.0
     return {"precision": precision, "recall": recall, "f1": f1}
 
-# ============================================
-# ✅ 主体脚本
-# ============================================
-
 # 模型配置
 model_name = "Langboat/mengzi-t5-base"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -64,7 +57,7 @@ model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
 
 # 强制 GPU
 if not torch.cuda.is_available():
-    raise RuntimeError("必须使用GPU训练，请检查CUDA环境")
+    raise RuntimeError("使用GPU训练，请检查CUDA环境")
 device = torch.device("cuda")
 model = model.to(device)
 
